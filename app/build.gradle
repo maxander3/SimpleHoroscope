@@ -32,6 +32,8 @@ android {
 }
 
 dependencies {
+    //Gif
+    implementation 'pl.droidsonroids.gif:android-gif-drawable:1.2.17'
     //TODO Retrofit сделать зависимость для всех модулей
     implementation 'com.squareup.retrofit2:retrofit:2.9.0'
     //ViewModel
