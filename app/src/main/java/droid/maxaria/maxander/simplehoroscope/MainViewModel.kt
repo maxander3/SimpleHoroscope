@@ -12,15 +12,6 @@ import kotlinx.coroutines.launch
 
 class MainViewModel:ViewModel() {
 
-    private val api=ApiProvider()
-    private val repository=RepositoryImpl(api)
-    private val getPredictUseCase=GetPredictUseCase(repository)
-    //TODO DI
-    fun getPredict(sign:String){
-        GlobalScope.launch(Dispatchers.IO) {
-            val result=getPredictUseCase.getPredict(sign)
-            Log.d("TAG",result.body().toString())
-        }
-    }
+
 
 }

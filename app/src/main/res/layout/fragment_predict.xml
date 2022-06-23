@@ -6,8 +6,9 @@
     tools:context=".fragments.predictfragment.PredictFragment">
 
     <TextView
+        android:id="@+id/predict_txt"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:text="Hello" />
+        android:textColor="@color/white"/>
 
 </FrameLayout>

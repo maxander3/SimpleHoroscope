@@ -5,7 +5,8 @@
     android:layout_height="match_parent"
     tools:context=".fragments.mainfragment.MainFragment"
     android:orientation="vertical"
-    android:layout_marginTop="60dp">
+    android:layout_marginTop="60dp"
+    android:gravity="center">
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -19,21 +20,51 @@
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        >
+        <ImageView
+            android:id="@+id/aries_img"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:src="@mipmap/aries_icon"
+            android:layout_margin="10dp"
+            android:clickable="true"/>
+        <ImageView
+            android:id="@+id/taurus_img"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:src="@mipmap/taurus_icon"
+            android:layout_margin="10dp"
+            android:clickable="true"/>
+        <ImageView
+            android:id="@+id/gemini_img"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:src="@mipmap/gemini_icon"
+            android:layout_margin="10dp"
+            android:clickable="true"/>
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:orientation="horizontal">
         <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:src="@drawable/ic_aries_icon"
+            android:id="@+id/cancer_img"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:src="@mipmap/cancer_icon"
             android:layout_margin="10dp"/>
         <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:src="@drawable/ic_taurus_icon"
+            android:id="@+id/leo_img"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:src="@mipmap/leo_icon"
             android:layout_margin="10dp"/>
         <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:src="@drawable/ic_gemini_icon"
+            android:id="@+id/virgio_img"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:src="@mipmap/virgo_icon"
             android:layout_margin="10dp"/>
     </LinearLayout>
     <LinearLayout
@@ -41,39 +72,22 @@
         android:layout_height="wrap_content"
         android:orientation="horizontal">
         <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:src="@drawable/ic_cancer_icon"
+            android:id="@+id/libra_img"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:src="@mipmap/libra_icon"
             android:layout_margin="10dp"/>
         <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:src="@drawable/ic_leo_icon"
+            android:id="@+id/scorpio_img"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:src="@mipmap/scorpio_icon"
             android:layout_margin="10dp"/>
         <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:src="@drawable/ic_virgo_icon"
-            android:layout_margin="10dp"/>
-    </LinearLayout>
-    <LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal">
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:src="@drawable/ic_libra_icon"
-            android:layout_margin="10dp"/>
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:src="@drawable/ic_scorpio_icon"
-            android:layout_margin="10dp"/>
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:src="@drawable/ic_sagittarius_icon"
+            android:id="@+id/sagittarius_img"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:src="@mipmap/sagittarius_icon"
             android:layout_margin="10dp"/>
     </LinearLayout>
     <LinearLayout
@@ -81,19 +95,22 @@
         android:layout_height="wrap_content"
         android:orientation="horizontal">
         <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:src="@drawable/ic_capricornus_icon"
+            android:id="@+id/capricornus_img"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:src="@mipmap/capricornus_icon"
             android:layout_margin="10dp"/>
         <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:src="@drawable/ic_aquarius_icon"
+            android:id="@+id/aquarius_img"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:src="@mipmap/aquarius_icon"
             android:layout_margin="10dp"/>
         <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:src="@drawable/ic_pisces_icon"
+            android:id="@+id/pisces_img"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:src="@mipmap/pisces_icon"
             android:layout_margin="10dp"/>
     </LinearLayout>
 

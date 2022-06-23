@@ -6,27 +6,40 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.viewModels
+import androidx.lifecycle.Observer
+import droid.maxaria.maxander.domain.model.ForecastModel
 import droid.maxaria.maxander.simplehoroscope.R
+import droid.maxaria.maxander.simplehoroscope.databinding.FragmentPredictBinding
 
 class PredictFragment : Fragment() {
 
-    companion object {
-        fun newInstance() = PredictFragment()
-    }
 
-    private lateinit var viewModel: PredictFragmentViewModel
+    private val mViewModel: PredictFragmentViewModel by viewModels<PredictFragmentViewModel>()
+    private var _binding: FragmentPredictBinding? = null
+    val mBinding: FragmentPredictBinding
+        get() = _binding!!
+    private lateinit var currentSign:String
+
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?,
-    ): View? {
-        return inflater.inflate(R.layout.fragment_predict, container, false)
+    ): View {
+        _binding = FragmentPredictBinding.inflate(layoutInflater,container,false)
+        currentSign = arguments?.getString("zodiac_sign").toString()
+        mViewModel.getPredict(currentSign)
+        mViewModel.predictLive.observe(viewLifecycleOwner){
+            mBinding.predictTxt.text = it.horoscope
+        }
+        return mBinding.root
     }
 
-    override fun onActivityCreated(savedInstanceState: Bundle?) {
-        super.onActivityCreated(savedInstanceState)
-        viewModel = ViewModelProvider(this).get(PredictFragmentViewModel::class.java)
-        // TODO: Use the ViewModel
+    override fun onDetach() {
+        _binding = null
+        mViewModel.predictLive.removeObservers(viewLifecycleOwner)
+        super.onDetach()
     }
+
 
 }
