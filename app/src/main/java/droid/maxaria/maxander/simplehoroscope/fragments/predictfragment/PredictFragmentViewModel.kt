@@ -3,6 +3,7 @@ package droid.maxaria.maxander.simplehoroscope.fragments.predictfragment
 import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import dagger.hilt.android.scopes.ViewModelScoped
 import droid.maxaria.maxander.data.RepositoryImpl
 import droid.maxaria.maxander.data.api.ApiProvider
 import droid.maxaria.maxander.domain.model.ForecastModel
@@ -12,7 +13,7 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 
-class PredictFragmentViewModel : ViewModel() {
+class PredictFragmentViewModel (): ViewModel() {
     var predictLive = MutableLiveData<ForecastModel>()
 
     private val api= ApiProvider()

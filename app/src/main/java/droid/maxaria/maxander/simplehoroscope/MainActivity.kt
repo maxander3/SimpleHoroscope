@@ -6,11 +6,11 @@ import android.util.Log
 import androidx.activity.viewModels
 import androidx.navigation.NavController
 import androidx.navigation.NavHost
+import dagger.hilt.android.AndroidEntryPoint
 import droid.maxaria.maxander.simplehoroscope.databinding.ActivityMainBinding
 
-class MainActivity : AppCompatActivity() {
+class MainActivity (): AppCompatActivity() {
     //______________________________________________________________________________________________
-    val mViewModel:MainViewModel by viewModels<MainViewModel>()
     private var _binding:ActivityMainBinding?=null
     lateinit var navController: NavController
     val mBinding:ActivityMainBinding
@@ -20,9 +20,8 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         _binding= ActivityMainBinding.inflate(layoutInflater)
         setContentView(mBinding.root)
-        APP_ACTIVITY=this
         navController=(supportFragmentManager.findFragmentById(R.id.fragment_container) as NavHost).navController
-            // mViewModel.getPredict("aquarius")
+        APP_ACTIVITY=this
     }
     //______________________________________________________________________________________________
     override fun onDestroy() {

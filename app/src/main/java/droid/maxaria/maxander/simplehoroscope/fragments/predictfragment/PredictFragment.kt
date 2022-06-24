@@ -8,14 +8,14 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
+import dagger.hilt.android.AndroidEntryPoint
 import droid.maxaria.maxander.domain.model.ForecastModel
+import droid.maxaria.maxander.simplehoroscope.APP_ACTIVITY
 import droid.maxaria.maxander.simplehoroscope.R
 import droid.maxaria.maxander.simplehoroscope.databinding.FragmentPredictBinding
 
 class PredictFragment : Fragment() {
-
-
-    private val mViewModel: PredictFragmentViewModel by viewModels<PredictFragmentViewModel>()
+    private val mViewModel: PredictFragmentViewModel by viewModels()
     private var _binding: FragmentPredictBinding? = null
     val mBinding: FragmentPredictBinding
         get() = _binding!!
@@ -27,18 +27,26 @@ class PredictFragment : Fragment() {
         savedInstanceState: Bundle?,
     ): View {
         _binding = FragmentPredictBinding.inflate(layoutInflater,container,false)
+        init()
+        return mBinding.root
+    }
+
+    override fun onDestroyView() {
+        _binding = null
+        mViewModel.predictLive.removeObservers(viewLifecycleOwner)
+        super.onDestroyView()
+    }
+    private fun init(){
         currentSign = arguments?.getString("zodiac_sign").toString()
+        mBinding.signNameTxt.text = currentSign
+        mBinding.predictTxt.setText(R.string.loading)
         mViewModel.getPredict(currentSign)
         mViewModel.predictLive.observe(viewLifecycleOwner){
             mBinding.predictTxt.text = it.horoscope
         }
-        return mBinding.root
-    }
-
-    override fun onDetach() {
-        _binding = null
-        mViewModel.predictLive.removeObservers(viewLifecycleOwner)
-        super.onDetach()
+        mBinding.predictTxtBack.setOnClickListener{
+            APP_ACTIVITY.navController.navigate(R.id.action_predictFragment_to_mainFragment)
+        }
     }
 
 
