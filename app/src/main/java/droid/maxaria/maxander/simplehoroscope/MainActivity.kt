@@ -8,8 +8,8 @@ import androidx.navigation.NavController
 import androidx.navigation.NavHost
 import dagger.hilt.android.AndroidEntryPoint
 import droid.maxaria.maxander.simplehoroscope.databinding.ActivityMainBinding
-
-class MainActivity (): AppCompatActivity() {
+@AndroidEntryPoint
+class MainActivity : AppCompatActivity() {
     //______________________________________________________________________________________________
     private var _binding:ActivityMainBinding?=null
     lateinit var navController: NavController
