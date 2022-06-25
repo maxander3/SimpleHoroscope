@@ -1,5 +1,7 @@
 package droid.maxaria.maxander.simplehoroscope.fragments.mainfragment
 
+import android.content.Context
+import android.content.SharedPreferences
 import androidx.lifecycle.ViewModelProvider
 import android.os.Bundle
 import android.util.Log
@@ -11,19 +13,18 @@ import androidx.fragment.app.viewModels
 import droid.maxaria.maxander.simplehoroscope.*
 import droid.maxaria.maxander.simplehoroscope.databinding.FragmentMainBinding
 
-class MainFragment : Fragment(),View.OnClickListener {
+class MainFragment : Fragment(), View.OnClickListener {
 
-    private var _binding:FragmentMainBinding? = null
-    val mBinding:FragmentMainBinding
-    get() = _binding!!
-    val mViewModel:MainFragmentViewModel by viewModels<MainFragmentViewModel>()
+    private var _binding: FragmentMainBinding? = null
+    val mBinding: FragmentMainBinding
+        get() = _binding!!
 
     //______________________________________________________________________________________________
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?,
     ): View? {
-        _binding=FragmentMainBinding.inflate(layoutInflater,container,false)
+        _binding = FragmentMainBinding.inflate(layoutInflater, container, false)
         mBinding.aquariusImg.setOnClickListener(this)
         mBinding.ariesImg.setOnClickListener(this)
         mBinding.cancerImg.setOnClickListener(this)
@@ -46,25 +47,63 @@ class MainFragment : Fragment(),View.OnClickListener {
     }
 
     override fun onClick(p0: View?) {
-            Log.d("TAG","2click")
-            val bundle=Bundle()
-            when (p0) {
-                mBinding.aquariusImg->bundle.putString("zodiac_sign", AQUARIUS_ID)
-                mBinding.ariesImg->bundle.putString("zodiac_sign", ARIES_ID)
-                mBinding.cancerImg->bundle.putString("zodiac_sign", CANCER_ID)
-                mBinding.leoImg->bundle.putString("zodiac_sign", LEO_ID)
-                mBinding.capricornusImg->bundle.putString("zodiac_sign", CAPRICORNUS_ID)
-                mBinding.geminiImg->bundle.putString("zodiac_sign", GEMINI_ID)
-                mBinding.libraImg->bundle.putString("zodiac_sign", LIBRA_ID)
-                mBinding.piscesImg->bundle.putString("zodiac_sign", PISCES_ID)
-                mBinding.sagittariusImg->bundle.putString("zodiac_sign", SAGITTARIUS_ID)
-                mBinding.scorpioImg->bundle.putString("zodiac_sign", SCORPIO_ID)
-                mBinding.taurusImg->bundle.putString("zodiac_sign", TAURUS_ID)
-                mBinding.virgioImg->bundle.putString("zodiac_sign", VIRGO_ID)
-                else->bundle.putString("zodiac_sign", ERROR_String)
+        Log.d("TAG", "2click")
+        val bundle = Bundle()
+        val editor = activity!!.getSharedPreferences("Sign",
+            Context.MODE_PRIVATE)!!.edit()
+        when (p0) {
+            mBinding.aquariusImg -> {
+                bundle.putString(bundleSharedName, AQUARIUS_ID)
+                editor.putString(bundleSharedName, AQUARIUS_ID)
             }
-            if (bundle!=null)
-                APP_ACTIVITY.navController.navigate(R.id.action_mainFragment_to_predictFragment,bundle)
+            mBinding.ariesImg -> {
+                bundle.putString(bundleSharedName, ARIES_ID)
+                editor.putString(bundleSharedName, ARIES_ID)
+            }
+            mBinding.cancerImg -> {
+                bundle.putString(bundleSharedName, CANCER_ID)
+                editor.putString(bundleSharedName, CANCER_ID)
+            }
+            mBinding.leoImg -> {
+                bundle.putString(bundleSharedName, LEO_ID)
+                editor.putString(bundleSharedName, LEO_ID)
+            }
+            mBinding.capricornusImg -> {
+                bundle.putString(bundleSharedName, CAPRICORNUS_ID)
+                editor.putString(bundleSharedName, CAPRICORNUS_ID)
+            }
+            mBinding.geminiImg -> {
+                bundle.putString(bundleSharedName, GEMINI_ID)
+                editor.putString(bundleSharedName, GEMINI_ID)
+            }
+            mBinding.libraImg -> {
+                bundle.putString(bundleSharedName, LIBRA_ID)
+                editor.putString(bundleSharedName, LIBRA_ID)
+            }
+            mBinding.piscesImg -> {
+                bundle.putString(bundleSharedName, PISCES_ID)
+                editor.putString(bundleSharedName, PISCES_ID)
+            }
+            mBinding.sagittariusImg -> {
+                bundle.putString(bundleSharedName, SAGITTARIUS_ID)
+                editor.putString(bundleSharedName, SAGITTARIUS_ID)
+            }
+            mBinding.scorpioImg -> {
+                bundle.putString(bundleSharedName, SCORPIO_ID)
+                editor.putString(bundleSharedName, SCORPIO_ID)
+            }
+            mBinding.taurusImg -> {
+                bundle.putString(bundleSharedName, TAURUS_ID)
+                editor.putString(bundleSharedName, TAURUS_ID)
+            }
+            mBinding.virgioImg -> {
+                bundle.putString(bundleSharedName, VIRGO_ID)
+                editor.putString(bundleSharedName, VIRGO_ID)
+            }
+            else -> bundle.putString(bundleSharedName, ERROR_String)
+        }
+        editor.commit()
+        APP_ACTIVITY.navController.navigate(R.id.action_mainFragment_to_predictFragment, bundle)
     }
 
 

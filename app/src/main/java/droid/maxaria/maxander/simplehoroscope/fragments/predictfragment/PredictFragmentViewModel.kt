@@ -7,6 +7,7 @@ import dagger.hilt.android.lifecycle.HiltViewModel
 import droid.maxaria.maxander.data.RepositoryImpl
 import droid.maxaria.maxander.data.api.ApiProvider
 import droid.maxaria.maxander.domain.model.ForecastModel
+
 import droid.maxaria.maxander.domain.usecases.GetPredictUseCase
 import kotlinx.coroutines.DelicateCoroutinesApi
 import kotlinx.coroutines.Dispatchers

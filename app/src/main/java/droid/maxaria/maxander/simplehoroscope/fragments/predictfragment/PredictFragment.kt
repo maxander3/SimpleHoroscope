@@ -1,5 +1,6 @@
 package droid.maxaria.maxander.simplehoroscope.fragments.predictfragment
 
+import android.content.Context
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -11,9 +12,7 @@ import dagger.hilt.android.AndroidEntryPoint
 import droid.maxaria.maxander.data.RepositoryImpl
 import droid.maxaria.maxander.data.api.ApiProvider
 import droid.maxaria.maxander.domain.usecases.GetPredictUseCase
-import droid.maxaria.maxander.simplehoroscope.APP_ACTIVITY
-import droid.maxaria.maxander.simplehoroscope.App
-import droid.maxaria.maxander.simplehoroscope.R
+import droid.maxaria.maxander.simplehoroscope.*
 import droid.maxaria.maxander.simplehoroscope.databinding.FragmentPredictBinding
 import javax.inject.Inject
 @AndroidEntryPoint
@@ -43,11 +42,14 @@ class PredictFragment : Fragment() {
 
     private fun init(){
 
-        currentSign = arguments?.getString("zodiac_sign").toString()
+        currentSign = arguments?.getString(bundleSharedName).toString()
         mBinding.signNameTxt.text = currentSign
         mBinding.predictTxt.setText(R.string.loading)
         mViewModel.getPredict(currentSign)
         mViewModel.predictLive.observe(viewLifecycleOwner){
+            activity!!.getSharedPreferences("Sign", Context.MODE_PRIVATE)!!.edit().putString(
+                sharedPredictName,it.horoscope).commit()
+
             mBinding.predictTxt.text = it.horoscope
         }
         mBinding.predictTxtBack.setOnClickListener{
