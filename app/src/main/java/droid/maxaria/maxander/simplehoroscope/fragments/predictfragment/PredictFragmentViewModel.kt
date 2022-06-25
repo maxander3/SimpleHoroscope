@@ -17,7 +17,7 @@ import javax.inject.Inject
 @HiltViewModel
 class PredictFragmentViewModel @Inject constructor (private val getPredictUseCase: GetPredictUseCase): ViewModel() {
     var predictLive = MutableLiveData<ForecastModel>()
-    
+
 
     @OptIn(DelicateCoroutinesApi::class)
     fun getPredict(sign:String){

@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "315212696009",
+    "project_id": "simple-horoscope-f99e2",
+    "storage_bucket": "simple-horoscope-f99e2.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:315212696009:android:0755bf20c1d847f00e8018",
+        "android_client_info": {
+          "package_name": "droid.maxaria.maxander.simplehoroscope"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "315212696009-81fvose6jsmbvdsgpq2auiqvroau4ckl.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAvIwK1k1ygY_Yytou19VcZHg-qUzGOFcg"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "315212696009-81fvose6jsmbvdsgpq2auiqvroau4ckl.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
