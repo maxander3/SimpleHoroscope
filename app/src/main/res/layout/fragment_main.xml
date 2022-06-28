@@ -114,4 +114,13 @@
             android:layout_margin="10dp"/>
     </LinearLayout>
 
+    <Button
+        android:id="@+id/main_to_saved_btn"
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:background="@drawable/saved_predicts_btn"
+        android:text="@string/saved_predicts"
+        android:textColor="@color/gold"
+        android:textSize="18sp"/>
+
 </LinearLayout>

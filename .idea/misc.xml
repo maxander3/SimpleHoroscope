@@ -6,9 +6,19 @@
         <entry key="..\:/GoodProject/SimpleHoroscope/app/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.179" />
         <entry key="..\:/GoodProject/SimpleHoroscope/app/src/main/res/drawable/ic_aquarius_icon.xml" value="0.179" />
         <entry key="..\:/GoodProject/SimpleHoroscope/app/src/main/res/drawable/ic_launcher_background.xml" value="0.179" />
+        <entry key="..\:/GoodProject/SimpleHoroscope/app/src/main/res/drawable/saved_predicts_btn.xml" value="0.196" />
+        <entry key="..\:/GoodProject/SimpleHoroscope/app/src/main/res/drawable/saved_predicts_btn_pressed.xml" value="0.196" />
+        <entry key="..\:/GoodProject/SimpleHoroscope/app/src/main/res/layout/PredictCard.xml" value="0.23802083333333332" />
         <entry key="..\:/GoodProject/SimpleHoroscope/app/src/main/res/layout/activity_main.xml" value="0.264" />
+        <entry key="..\:/GoodProject/SimpleHoroscope/app/src/main/res/layout/fragment_list.xml" value="0.225" />
         <entry key="..\:/GoodProject/SimpleHoroscope/app/src/main/res/layout/fragment_main.xml" value="0.264" />
         <entry key="..\:/GoodProject/SimpleHoroscope/app/src/main/res/layout/fragment_predict.xml" value="0.225" />
+<<<<<<< Updated upstream
+=======
+        <entry key="..\:/GoodProject/SimpleHoroscope/app/src/main/res/layout/fragment_scrolling.xml" value="0.2390625" />
+        <entry key="..\:/GoodProject/SimpleHoroscope/app/src/main/res/layout/main_widget.xml" value="0.176" />
+        <entry key="..\:/GoodProject/SimpleHoroscope/app/src/main/res/layout/predict_card.xml" value="0.2234375" />
+>>>>>>> Stashed changes
       </map>
     </option>
   </component>

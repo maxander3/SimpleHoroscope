@@ -36,6 +36,9 @@ class MainFragment : Fragment(),View.OnClickListener {
         mBinding.scorpioImg.setOnClickListener(this)
         mBinding.taurusImg.setOnClickListener(this)
         mBinding.virgioImg.setOnClickListener(this)
+        mBinding.mainToSavedBtn.setOnClickListener{
+            APP_ACTIVITY.navController.navigate(R.id.action_mainFragment_to_listFragment)
+        }
         return mBinding.root
     }
 
@@ -46,6 +49,7 @@ class MainFragment : Fragment(),View.OnClickListener {
     }
 
     override fun onClick(p0: View?) {
+<<<<<<< Updated upstream
             Log.d("TAG","2click")
             val bundle=Bundle()
             when (p0) {
@@ -62,6 +66,15 @@ class MainFragment : Fragment(),View.OnClickListener {
                 mBinding.taurusImg->bundle.putString("zodiac_sign", TAURUS_ID)
                 mBinding.virgioImg->bundle.putString("zodiac_sign", VIRGO_ID)
                 else->bundle.putString("zodiac_sign", ERROR_String)
+=======
+        val bundle = Bundle()
+        val editor = activity!!.getSharedPreferences("Sign",
+            Context.MODE_PRIVATE)!!.edit()
+        when (p0) {
+            mBinding.aquariusImg -> {
+                bundle.putString(bundleSharedName, AQUARIUS_ID)
+                editor.putString(bundleSharedName, AQUARIUS_ID)
+>>>>>>> Stashed changes
             }
             if (bundle!=null)
                 APP_ACTIVITY.navController.navigate(R.id.action_mainFragment_to_predictFragment,bundle)

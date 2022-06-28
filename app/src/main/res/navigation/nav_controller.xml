@@ -13,6 +13,9 @@
         <action
             android:id="@+id/action_mainFragment_to_predictFragment"
             app:destination="@id/predictFragment" />
+        <action
+            android:id="@+id/action_mainFragment_to_listFragment"
+            app:destination="@id/listFragment" />
     </fragment>
     <fragment
         android:id="@+id/predictFragment"
@@ -21,6 +24,15 @@
         tools:layout="@layout/fragment_predict" >
         <action
             android:id="@+id/action_predictFragment_to_mainFragment"
+            app:destination="@id/mainFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/listFragment"
+        android:name="droid.maxaria.maxander.simplehoroscope.fragments.listfragment.ListFragment"
+        android:label="fragment_list"
+        tools:layout="@layout/fragment_list" >
+        <action
+            android:id="@+id/action_listFragment_to_mainFragment"
             app:destination="@id/mainFragment" />
     </fragment>
 </navigation>

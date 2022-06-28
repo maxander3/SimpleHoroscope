@@ -6,7 +6,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".fragments.predictfragment.PredictFragment">
     <Button
-        android:id="@+id/btn_back"
+        android:id="@+id/btn_save"
         android:layout_width="50dp"
         android:layout_height="50dp"
         app:layout_constraintStart_toStartOf="parent"

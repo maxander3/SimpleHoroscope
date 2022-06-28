@@ -1,21 +1,24 @@
 package droid.maxaria.maxander.simplehoroscope.fragments.predictfragment
 
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.viewModels
-import androidx.lifecycle.ViewModelProvider
 import dagger.hilt.android.AndroidEntryPoint
+<<<<<<< Updated upstream
 import droid.maxaria.maxander.data.RepositoryImpl
 import droid.maxaria.maxander.data.api.ApiProvider
 import droid.maxaria.maxander.domain.usecases.GetPredictUseCase
 import droid.maxaria.maxander.simplehoroscope.APP_ACTIVITY
 import droid.maxaria.maxander.simplehoroscope.App
 import droid.maxaria.maxander.simplehoroscope.R
+=======
+import droid.maxaria.maxander.simplehoroscope.*
+>>>>>>> Stashed changes
 import droid.maxaria.maxander.simplehoroscope.databinding.FragmentPredictBinding
-import javax.inject.Inject
 @AndroidEntryPoint
 class PredictFragment : Fragment() {
 
@@ -49,6 +52,12 @@ class PredictFragment : Fragment() {
         mViewModel.getPredict(currentSign)
         mViewModel.predictLive.observe(viewLifecycleOwner){
             mBinding.predictTxt.text = it.horoscope
+        }
+        mBinding.btnSave.setOnClickListener{
+            Log.d("TAG","clicked")
+            mViewModel.savePredict(mViewModel.predictLive.value?.copy() ?: return@setOnClickListener){
+                Log.d("TAG","save")
+            }
         }
         mBinding.predictTxtBack.setOnClickListener{
             APP_ACTIVITY.navController.navigate(R.id.action_predictFragment_to_mainFragment)

@@ -8,6 +8,7 @@ import droid.maxaria.maxander.data.RepositoryImpl
 import droid.maxaria.maxander.data.api.ApiProvider
 import droid.maxaria.maxander.domain.model.ForecastModel
 import droid.maxaria.maxander.domain.usecases.GetPredictUseCase
+import droid.maxaria.maxander.domain.usecases.SavePredictUseCase
 import kotlinx.coroutines.DelicateCoroutinesApi
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
@@ -15,7 +16,11 @@ import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
-class PredictFragmentViewModel @Inject constructor (private val getPredictUseCase: GetPredictUseCase): ViewModel() {
+class PredictFragmentViewModel @Inject constructor (
+    private val getPredictUseCase: GetPredictUseCase,
+    private val savePredictUseCase: SavePredictUseCase)
+    : ViewModel() {
+
     var predictLive = MutableLiveData<ForecastModel>()
 
 
@@ -25,6 +30,12 @@ class PredictFragmentViewModel @Inject constructor (private val getPredictUseCas
             val result=getPredictUseCase.getPredict(sign)
             predictLive.postValue(result.body())
             Log.d("TAG",result.body().toString())
+        }
+    }
+    @OptIn(DelicateCoroutinesApi::class)
+    fun savePredict(predict:ForecastModel,it:()->Unit){
+        GlobalScope.launch(Dispatchers.IO) {
+            savePredictUseCase.savePredictUseCase(predict)
         }
     }
 }
