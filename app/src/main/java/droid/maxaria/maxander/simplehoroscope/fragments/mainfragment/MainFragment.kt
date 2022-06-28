@@ -1,14 +1,12 @@
 package droid.maxaria.maxander.simplehoroscope.fragments.mainfragment
 
 import android.content.Context
-import androidx.lifecycle.ViewModelProvider
 import android.os.Bundle
 import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.fragment.app.viewModels
 import droid.maxaria.maxander.simplehoroscope.*
 import droid.maxaria.maxander.simplehoroscope.databinding.FragmentMainBinding
 
@@ -55,57 +53,57 @@ class MainFragment : Fragment(), View.OnClickListener {
             Context.MODE_PRIVATE)!!.edit()
         when (p0) {
             mBinding.aquariusImg -> {
-                bundle.putString(bundleSharedName, AQUARIUS_ID)
-                editor.putString(bundleSharedName, AQUARIUS_ID)
+                bundle.putString(ZODIAC, AQUARIUS_ID)
+                editor.putString(ZODIAC, AQUARIUS_ID)
             }
             mBinding.ariesImg -> {
-                bundle.putString(bundleSharedName, ARIES_ID)
-                editor.putString(bundleSharedName, ARIES_ID)
+                bundle.putString(ZODIAC, ARIES_ID)
+                editor.putString(ZODIAC, ARIES_ID)
             }
             mBinding.cancerImg -> {
-                bundle.putString(bundleSharedName, CANCER_ID)
-                editor.putString(bundleSharedName, CANCER_ID)
+                bundle.putString(ZODIAC, CANCER_ID)
+                editor.putString(ZODIAC, CANCER_ID)
             }
             mBinding.leoImg -> {
-                bundle.putString(bundleSharedName, LEO_ID)
-                editor.putString(bundleSharedName, LEO_ID)
+                bundle.putString(ZODIAC, LEO_ID)
+                editor.putString(ZODIAC, LEO_ID)
             }
             mBinding.capricornusImg -> {
-                bundle.putString(bundleSharedName, CAPRICORNUS_ID)
-                editor.putString(bundleSharedName, CAPRICORNUS_ID)
+                bundle.putString(ZODIAC, CAPRICORNUS_ID)
+                editor.putString(ZODIAC, CAPRICORNUS_ID)
             }
             mBinding.geminiImg -> {
-                bundle.putString(bundleSharedName, GEMINI_ID)
-                editor.putString(bundleSharedName, GEMINI_ID)
+                bundle.putString(ZODIAC, GEMINI_ID)
+                editor.putString(ZODIAC, GEMINI_ID)
             }
             mBinding.libraImg -> {
-                bundle.putString(bundleSharedName, LIBRA_ID)
-                editor.putString(bundleSharedName, LIBRA_ID)
+                bundle.putString(ZODIAC, LIBRA_ID)
+                editor.putString(ZODIAC, LIBRA_ID)
             }
             mBinding.piscesImg -> {
-                bundle.putString(bundleSharedName, PISCES_ID)
-                editor.putString(bundleSharedName, PISCES_ID)
+                bundle.putString(ZODIAC, PISCES_ID)
+                editor.putString(ZODIAC, PISCES_ID)
             }
             mBinding.sagittariusImg -> {
-                bundle.putString(bundleSharedName, SAGITTARIUS_ID)
-                editor.putString(bundleSharedName, SAGITTARIUS_ID)
+                bundle.putString(ZODIAC, SAGITTARIUS_ID)
+                editor.putString(ZODIAC, SAGITTARIUS_ID)
             }
             mBinding.scorpioImg -> {
-                bundle.putString(bundleSharedName, SCORPIO_ID)
-                editor.putString(bundleSharedName, SCORPIO_ID)
+                bundle.putString(ZODIAC, SCORPIO_ID)
+                editor.putString(ZODIAC, SCORPIO_ID)
             }
             mBinding.taurusImg -> {
-                bundle.putString(bundleSharedName, TAURUS_ID)
-                editor.putString(bundleSharedName, TAURUS_ID)
+                bundle.putString(ZODIAC, TAURUS_ID)
+                editor.putString(ZODIAC, TAURUS_ID)
             }
             mBinding.virgioImg -> {
-                bundle.putString(bundleSharedName, VIRGO_ID)
-                editor.putString(bundleSharedName, VIRGO_ID)
+                bundle.putString(ZODIAC, VIRGO_ID)
+                editor.putString(ZODIAC, VIRGO_ID)
             }
-            else -> bundle.putString(bundleSharedName, ERROR_String)
+            else -> bundle.putString(ZODIAC, ERROR_String)
         }
         editor.commit()
-        APP_ACTIVITY.navController.navigate(R.id.action_mainFragment_to_predictFragment, bundle)
+        APP_ACTIVITY.navController.navigate(R.id.action_mainFragment_to_predictFragment,bundle)
     }
 }
 

@@ -1,8 +1,8 @@
 package droid.maxaria.maxander.simplehoroscope
 
 lateinit var APP_ACTIVITY:MainActivity
-const val bundleSharedName="zodiac_sign"
-const val sharedPredictName="Predict"
+const val ZODIAC="zodiac_sign"
+const val PREDICT="predict"
 const val ERROR_String ="Error"
 const val ARIES_ID="aries"
 const val TAURUS_ID="taurus"

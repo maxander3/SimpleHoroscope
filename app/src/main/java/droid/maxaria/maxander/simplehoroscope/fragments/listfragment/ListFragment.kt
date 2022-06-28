@@ -35,7 +35,6 @@ class ListFragment : Fragment() {
         recyclerView = mBinding.list
         recyclerView.adapter = adapter
         mViewModel.data.observe(viewLifecycleOwner){
-            Log.d("TAG",it.toString())
             if (it.isNotEmpty()) {
                 adapter.update(it)
             }

@@ -11,10 +11,9 @@ import androidx.fragment.app.viewModels
 import dagger.hilt.android.AndroidEntryPoint
 import droid.maxaria.maxander.data.RepositoryImpl
 import droid.maxaria.maxander.data.api.ApiProvider
+import droid.maxaria.maxander.domain.model.ForecastModel
 import droid.maxaria.maxander.domain.usecases.GetPredictUseCase
-import droid.maxaria.maxander.simplehoroscope.APP_ACTIVITY
-import droid.maxaria.maxander.simplehoroscope.App
-import droid.maxaria.maxander.simplehoroscope.R
+import droid.maxaria.maxander.simplehoroscope.*
 import droid.maxaria.maxander.simplehoroscope.databinding.FragmentPredictBinding
 @AndroidEntryPoint
 class PredictFragment : Fragment() {
@@ -23,8 +22,8 @@ class PredictFragment : Fragment() {
     private var _binding: FragmentPredictBinding? = null
     private val mBinding: FragmentPredictBinding
         get() = _binding!!
-    private lateinit var currentSign:String
-
+    private var currentSign:String? = null
+    private var currentPredict:ForecastModel? = null
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?,
@@ -43,11 +42,21 @@ class PredictFragment : Fragment() {
 
     private fun init(){
 
-        currentSign = arguments?.getString("zodiac_sign").toString()
-        mBinding.signNameTxt.text = currentSign
-        mBinding.predictTxt.setText(R.string.loading)
-        mViewModel.getPredict(currentSign)
+        currentSign = arguments?.getString(ZODIAC)
+        currentPredict = arguments?.getSerializable(PREDICT) as ForecastModel?
+        Log.d("taf", currentSign.toString())
+        if (currentSign != null) {
+            mBinding.predictTxt.setText(R.string.loading)
+            mViewModel.getPredict(currentSign!!)
+            mBinding.btnSave.visibility = View.VISIBLE
+        }else{
+           if (currentPredict != null) {
+               mViewModel.predictLive.value = currentPredict
+               mBinding.btnSave.visibility = View.INVISIBLE
+           }
+        }
         mViewModel.predictLive.observe(viewLifecycleOwner){
+            mBinding.signNameTxt.text = it.sign
             mBinding.predictTxt.text = it.horoscope
         }
         mBinding.btnSave.setOnClickListener{
@@ -56,7 +65,7 @@ class PredictFragment : Fragment() {
             }
         }
         mBinding.predictTxtBack.setOnClickListener{
-            APP_ACTIVITY.navController.navigate(R.id.action_predictFragment_to_mainFragment)
+            activity?.onBackPressed()
         }
     }
 
