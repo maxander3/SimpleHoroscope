@@ -6,4 +6,5 @@
     <string name="back">Back</string>
     <string name="loading" tools:ignore="TypographyEllipsis">Planets loading...</string>
     <string name="saved_predicts">Saved Predicts</string>
+    <string name="success">Success</string>
 </resources>

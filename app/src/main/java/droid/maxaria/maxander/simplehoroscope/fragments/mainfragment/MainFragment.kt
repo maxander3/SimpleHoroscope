@@ -36,6 +36,9 @@ class MainFragment : Fragment(), View.OnClickListener {
         mBinding.scorpioImg.setOnClickListener(this)
         mBinding.taurusImg.setOnClickListener(this)
         mBinding.virgioImg.setOnClickListener(this)
+        mBinding.mainToSavedBtn.setOnClickListener{
+            APP_ACTIVITY.navController.navigate(R.id.action_mainFragment_to_listFragment)
+        }
         return mBinding.root
     }
 
@@ -104,4 +107,5 @@ class MainFragment : Fragment(), View.OnClickListener {
         editor.commit()
         APP_ACTIVITY.navController.navigate(R.id.action_mainFragment_to_predictFragment, bundle)
     }
+}
 

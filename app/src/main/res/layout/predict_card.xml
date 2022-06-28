@@ -1,32 +1,41 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content">
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    app:cardBackgroundColor="@android:color/transparent"
+    app:cardCornerRadius="25dp"
+    android:layout_marginBottom="5dp">
+
     <LinearLayout
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical">
+        android:background="@color/black95"
+        android:orientation="horizontal">
+
         <TextView
             android:id="@+id/card_date"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_gravity="start|center"
+            android:layout_marginStart="10dp"
+            android:textColor="@color/white95"
+            android:textSize="24sp"
             android:textStyle="bold"
-            android:layout_gravity="center"
-            android:text="2131"/>
+            tools:text="24.08.2023" />
+
         <TextView
             android:id="@+id/card_sign"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textStyle="italic"
-            android:layout_gravity="center"
-            android:text="2131"/>
-        <TextView
-            android:id="@+id/card_txt"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textStyle="normal"
-            android:layout_gravity="center"
-            android:text="2131"/>
+            android:gravity="center"
+            android:fontFamily="@font/awakenning_font"
+            android:padding="5dp"
+            android:textColor="@color/gold95"
+            android:textSize="42sp"
+            android:textStyle="bold"
+            tools:text="Leo" />
     </LinearLayout>
 
 </androidx.cardview.widget.CardView>

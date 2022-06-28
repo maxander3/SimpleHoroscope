@@ -33,9 +33,10 @@ class PredictFragmentViewModel @Inject constructor (
         }
     }
     @OptIn(DelicateCoroutinesApi::class)
-    fun savePredict(predict:ForecastModel,it:()->Unit){
+    fun savePredict(predict:ForecastModel,success:()->Unit){
         GlobalScope.launch(Dispatchers.IO) {
             savePredictUseCase.savePredictUseCase(predict)
         }
+        success()
     }
 }

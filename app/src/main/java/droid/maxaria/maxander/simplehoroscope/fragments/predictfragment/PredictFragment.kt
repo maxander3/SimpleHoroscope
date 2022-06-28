@@ -6,18 +6,15 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.fragment.app.viewModels
 import dagger.hilt.android.AndroidEntryPoint
-<<<<<<< Updated upstream
 import droid.maxaria.maxander.data.RepositoryImpl
 import droid.maxaria.maxander.data.api.ApiProvider
 import droid.maxaria.maxander.domain.usecases.GetPredictUseCase
 import droid.maxaria.maxander.simplehoroscope.APP_ACTIVITY
 import droid.maxaria.maxander.simplehoroscope.App
 import droid.maxaria.maxander.simplehoroscope.R
-=======
-import droid.maxaria.maxander.simplehoroscope.*
->>>>>>> Stashed changes
 import droid.maxaria.maxander.simplehoroscope.databinding.FragmentPredictBinding
 @AndroidEntryPoint
 class PredictFragment : Fragment() {
@@ -54,9 +51,8 @@ class PredictFragment : Fragment() {
             mBinding.predictTxt.text = it.horoscope
         }
         mBinding.btnSave.setOnClickListener{
-            Log.d("TAG","clicked")
             mViewModel.savePredict(mViewModel.predictLive.value?.copy() ?: return@setOnClickListener){
-                Log.d("TAG","save")
+                Toast.makeText(APP_ACTIVITY,R.string.success,Toast.LENGTH_SHORT).show()
             }
         }
         mBinding.predictTxtBack.setOnClickListener{

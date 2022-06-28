@@ -13,6 +13,7 @@ class RepositoryImpl (private val apiProvider: ApiProvider, private val predictD
         return apiProvider.getForecast().getForecast(sign)
     }
 
+
     override suspend fun savePredict(data: ForecastModel) {
         predictDao.insert(data)
     }

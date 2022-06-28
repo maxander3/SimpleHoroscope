@@ -19,7 +19,6 @@ class ListAdapter @Inject constructor(): RecyclerView.Adapter<ListAdapter.ListVi
     inner class ListViewHolder(binding: PredictCardBinding):RecyclerView.ViewHolder(binding.root){
         val date = binding.cardDate
         val sign = binding.cardSign
-        val txt = binding.cardTxt
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ListViewHolder {
@@ -30,7 +29,6 @@ class ListAdapter @Inject constructor(): RecyclerView.Adapter<ListAdapter.ListVi
         holder.apply {
             date.text = mData[position].date
             sign.text = mData[position].sign
-            txt.text = mData[position].horoscope
         }
     }
 

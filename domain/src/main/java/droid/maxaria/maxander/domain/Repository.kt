@@ -7,6 +7,6 @@ import retrofit2.Response
 
 interface Repository {
     suspend fun getPredict(sign:String): Response<ForecastModel>
-    suspend fun savePredict(data:ForecastModel)
     val allData: LiveData<List<ForecastModel>>
+    suspend fun savePredict(data: ForecastModel)
 }
