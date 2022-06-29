@@ -7,6 +7,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.navigation.fragment.findNavController
 import droid.maxaria.maxander.simplehoroscope.*
 import droid.maxaria.maxander.simplehoroscope.databinding.FragmentMainBinding
 
@@ -35,7 +36,7 @@ class MainFragment : Fragment(), View.OnClickListener {
         mBinding.taurusImg.setOnClickListener(this)
         mBinding.virgioImg.setOnClickListener(this)
         mBinding.mainToSavedBtn.setOnClickListener{
-            APP_ACTIVITY.navController.navigate(R.id.action_mainFragment_to_listFragment)
+            findNavController().navigate(R.id.action_mainFragment_to_listFragment)
         }
         return mBinding.root
     }
@@ -103,7 +104,7 @@ class MainFragment : Fragment(), View.OnClickListener {
             else -> bundle.putString(ZODIAC, ERROR_String)
         }
         editor.commit()
-        APP_ACTIVITY.navController.navigate(R.id.action_mainFragment_to_predictFragment,bundle)
+        findNavController().navigate(R.id.action_mainFragment_to_predictFragment,bundle)
     }
 }
 

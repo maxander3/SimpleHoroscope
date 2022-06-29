@@ -20,8 +20,7 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         _binding= ActivityMainBinding.inflate(layoutInflater)
         setContentView(mBinding.root)
-        navController=(supportFragmentManager.findFragmentById(R.id.fragment_container) as NavHost).navController
-        APP_ACTIVITY=this
+
     }
     //______________________________________________________________________________________________
     override fun onDestroy() {

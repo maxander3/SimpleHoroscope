@@ -61,7 +61,7 @@ class PredictFragment : Fragment() {
         }
         mBinding.btnSave.setOnClickListener{
             mViewModel.savePredict(mViewModel.predictLive.value?.copy() ?: return@setOnClickListener){
-                Toast.makeText(APP_ACTIVITY,R.string.success,Toast.LENGTH_SHORT).show()
+                Toast.makeText(activity,R.string.success,Toast.LENGTH_SHORT).show()
             }
         }
         mBinding.predictTxtBack.setOnClickListener{

@@ -1,6 +1,5 @@
 package droid.maxaria.maxander.simplehoroscope
 
-lateinit var APP_ACTIVITY:MainActivity
 const val ZODIAC="zodiac_sign"
 const val PREDICT="predict"
 const val ERROR_String ="Error"
