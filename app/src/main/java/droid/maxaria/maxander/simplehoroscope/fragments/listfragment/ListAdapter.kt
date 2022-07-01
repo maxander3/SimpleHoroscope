@@ -20,7 +20,7 @@ class ListAdapter @Inject constructor(): RecyclerView.Adapter<ListAdapter.ListVi
     private var _data:List<ForecastModel> = emptyList()
     private val mData
         get() = _data
-    var onSignItemClickListener:OnSignItemClickListener? = null
+    var onSignItemClickListener:((bundle:Bundle)->Unit)? = null
     inner class ListViewHolder(binding: PredictCardBinding):RecyclerView.ViewHolder(binding.root){
         val date = binding.cardDate
         val sign = binding.cardSign
@@ -34,7 +34,7 @@ class ListAdapter @Inject constructor(): RecyclerView.Adapter<ListAdapter.ListVi
         holder.itemView.setOnClickListener{
             val bundle = Bundle()
             bundle.putSerializable(PREDICT,mData[position])
-            onSignItemClickListener?.onSignItemClick(bundle)
+            onSignItemClickListener?.invoke(bundle)
         }
         holder.apply {
             date.text = mData[position].date
@@ -42,9 +42,7 @@ class ListAdapter @Inject constructor(): RecyclerView.Adapter<ListAdapter.ListVi
         }
     }
     override fun getItemCount(): Int = mData.size
-    interface OnSignItemClickListener{
-        fun onSignItemClick(bundle: Bundle)
-    }
+
     fun update(data:List<ForecastModel>){
         _data=data.reversed()
         notifyDataSetChanged()

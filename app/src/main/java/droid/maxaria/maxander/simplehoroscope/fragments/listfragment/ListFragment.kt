@@ -35,11 +35,8 @@ class ListFragment : Fragment() {
     }
     private fun init(){
         adapter = ListAdapter()
-        adapter.onSignItemClickListener = object :ListAdapter.OnSignItemClickListener{
-            override fun onSignItemClick(bundle: Bundle) {
-                findNavController().navigate(R.id.action_listFragment_to_predictFragment,bundle)
-            }
-
+        adapter.onSignItemClickListener = {
+            findNavController().navigate(R.id.action_listFragment_to_predictFragment,it)
         }
         recyclerView = mBinding.list
         recyclerView.adapter = adapter
