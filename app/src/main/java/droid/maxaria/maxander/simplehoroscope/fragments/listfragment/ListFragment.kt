@@ -9,6 +9,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.viewModels
 import androidx.navigation.findNavController
 import androidx.navigation.fragment.findNavController
+import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.RecyclerView
 import dagger.hilt.android.AndroidEntryPoint
 import droid.maxaria.maxander.simplehoroscope.R
@@ -45,6 +46,29 @@ class ListFragment : Fragment() {
                 adapter.update(it)
             }
         }
+        recyclerSwipe()
+    }
+
+    private fun recyclerSwipe() {
+        val itemTouchHelper = ItemTouchHelper(object : ItemTouchHelper.SimpleCallback(
+            0,
+            ItemTouchHelper.LEFT or ItemTouchHelper.RIGHT
+        ) {
+
+            override fun onMove(
+                recyclerView: RecyclerView,
+                viewHolder: RecyclerView.ViewHolder,
+                target: RecyclerView.ViewHolder,
+            ): Boolean {
+                return false
+            }
+
+            override fun onSwiped(viewHolder: RecyclerView.ViewHolder, direction: Int) {
+                mViewModel.deletePredict(adapter.mData[viewHolder.adapterPosition])
+            }
+
+        })
+        itemTouchHelper.attachToRecyclerView(recyclerView)
     }
 
 

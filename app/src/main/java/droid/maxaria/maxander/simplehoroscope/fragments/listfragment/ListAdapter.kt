@@ -18,7 +18,7 @@ import javax.inject.Inject
 class ListAdapter @Inject constructor(): RecyclerView.Adapter<ListAdapter.ListViewHolder>() {
 
     private var _data:List<ForecastModel> = emptyList()
-    private val mData
+    val mData
         get() = _data
     var onSignItemClickListener:((bundle:Bundle)->Unit)? = null
     inner class ListViewHolder(binding: PredictCardBinding):RecyclerView.ViewHolder(binding.root){

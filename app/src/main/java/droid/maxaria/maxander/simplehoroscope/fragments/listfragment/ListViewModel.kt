@@ -6,6 +6,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.asLiveData
 import dagger.hilt.android.lifecycle.HiltViewModel
 import droid.maxaria.maxander.domain.model.ForecastModel
+import droid.maxaria.maxander.domain.usecases.DeletePredictUseCase
 import droid.maxaria.maxander.domain.usecases.GetSavedPredictsUseCase
 import kotlinx.coroutines.DelicateCoroutinesApi
 import kotlinx.coroutines.Dispatchers
@@ -17,8 +18,14 @@ import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
-class ListViewModel @Inject constructor(val getSavedPredictsCase: GetSavedPredictsUseCase): ViewModel() {
+class ListViewModel @Inject constructor(val getSavedPredictsCase: GetSavedPredictsUseCase,val deletePredictUseCase: DeletePredictUseCase): ViewModel() {
     var data = getSavedPredictsCase.getSavedPredicts()
+    @OptIn(DelicateCoroutinesApi::class)
+    fun deletePredict(data: ForecastModel){
+        GlobalScope.launch(Dispatchers.IO) {
+            deletePredictUseCase.deletePredictUseCase(data)
+        }
+    }
 
 
 }

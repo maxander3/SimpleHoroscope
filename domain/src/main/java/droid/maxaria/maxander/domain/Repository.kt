@@ -9,4 +9,5 @@ interface Repository {
     suspend fun getPredict(sign:String): Response<ForecastModel>
     val allData: LiveData<List<ForecastModel>>
     suspend fun savePredict(data: ForecastModel)
+    suspend fun deletePredict(data: ForecastModel)
 }
