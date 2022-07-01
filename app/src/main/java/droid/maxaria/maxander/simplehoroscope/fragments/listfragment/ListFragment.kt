@@ -7,8 +7,11 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.viewModels
+import androidx.navigation.findNavController
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.RecyclerView
 import dagger.hilt.android.AndroidEntryPoint
+import droid.maxaria.maxander.simplehoroscope.R
 import droid.maxaria.maxander.simplehoroscope.databinding.FragmentListBinding
 import javax.inject.Inject
 @AndroidEntryPoint
@@ -32,6 +35,12 @@ class ListFragment : Fragment() {
     }
     private fun init(){
         adapter = ListAdapter()
+        adapter.onSignItemClickListener = object :ListAdapter.OnSignItemClickListener{
+            override fun onSignItemClick(bundle: Bundle) {
+                findNavController().navigate(R.id.action_listFragment_to_predictFragment,bundle)
+            }
+
+        }
         recyclerView = mBinding.list
         recyclerView.adapter = adapter
         mViewModel.data.observe(viewLifecycleOwner){

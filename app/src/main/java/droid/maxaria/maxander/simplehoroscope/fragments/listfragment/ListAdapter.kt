@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import android.widget.AdapterView
 import androidx.cardview.widget.CardView
 import androidx.navigation.findNavController
 import androidx.recyclerview.widget.RecyclerView
@@ -19,7 +20,7 @@ class ListAdapter @Inject constructor(): RecyclerView.Adapter<ListAdapter.ListVi
     private var _data:List<ForecastModel> = emptyList()
     private val mData
         get() = _data
-
+    var onSignItemClickListener:OnSignItemClickListener? = null
     inner class ListViewHolder(binding: PredictCardBinding):RecyclerView.ViewHolder(binding.root){
         val date = binding.cardDate
         val sign = binding.cardSign
@@ -33,8 +34,7 @@ class ListAdapter @Inject constructor(): RecyclerView.Adapter<ListAdapter.ListVi
         holder.itemView.setOnClickListener{
             val bundle = Bundle()
             bundle.putSerializable(PREDICT,mData[position])
-            Log.d("TAG",mData[position].toString())
-            it.findNavController().navigate(R.id.action_listFragment_to_predictFragment,bundle)
+            onSignItemClickListener?.onSignItemClick(bundle)
         }
         holder.apply {
             date.text = mData[position].date
@@ -42,7 +42,9 @@ class ListAdapter @Inject constructor(): RecyclerView.Adapter<ListAdapter.ListVi
         }
     }
     override fun getItemCount(): Int = mData.size
-
+    interface OnSignItemClickListener{
+        fun onSignItemClick(bundle: Bundle)
+    }
     fun update(data:List<ForecastModel>){
         _data=data.reversed()
         notifyDataSetChanged()
