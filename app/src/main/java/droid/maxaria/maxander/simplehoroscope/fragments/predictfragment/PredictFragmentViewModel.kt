@@ -20,7 +20,9 @@ class PredictFragmentViewModel @Inject constructor (
     private val getPredictUseCase: GetPredictUseCase,
     private val savePredictUseCase: SavePredictUseCase)
     : ViewModel() {
-
+    var currentMode:String? = null
+    var currentSign:String? = null
+    var currentPredict:ForecastModel? = null
     var predictLive = MutableLiveData<ForecastModel>()
 
 

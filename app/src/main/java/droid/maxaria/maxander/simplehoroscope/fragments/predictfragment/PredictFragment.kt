@@ -15,20 +15,21 @@ import droid.maxaria.maxander.domain.model.ForecastModel
 import droid.maxaria.maxander.domain.usecases.GetPredictUseCase
 import droid.maxaria.maxander.simplehoroscope.*
 import droid.maxaria.maxander.simplehoroscope.databinding.FragmentPredictBinding
+import java.lang.RuntimeException
+
 @AndroidEntryPoint
 class PredictFragment : Fragment() {
 
-    private val mViewModel:PredictFragmentViewModel by viewModels()
+    private val mViewModel: PredictFragmentViewModel by viewModels()
     private var _binding: FragmentPredictBinding? = null
     private val mBinding: FragmentPredictBinding
         get() = _binding!!
-    private var currentSign:String? = null
-    private var currentPredict:ForecastModel? = null
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?,
     ): View {
-        _binding = FragmentPredictBinding.inflate(layoutInflater,container,false)
+        _binding = FragmentPredictBinding.inflate(layoutInflater, container, false)
         return mBinding.root
     }
 
@@ -43,34 +44,75 @@ class PredictFragment : Fragment() {
         super.onDestroyView()
     }
 
-    private fun init(){
+    private fun init() {
+        parseParams()
 
-        currentSign = arguments?.getString(ZODIAC)
-        currentPredict = arguments?.getSerializable(PREDICT) as ForecastModel?
-        Log.d("taf", currentSign.toString())
-        if (currentSign != null) {
-            mBinding.predictTxt.setText(R.string.loading)
-            mViewModel.getPredict(currentSign!!)
-            mBinding.btnSave.visibility = View.VISIBLE
-        }else{
-           if (currentPredict != null) {
-               mViewModel.predictLive.value = currentPredict
-               mBinding.btnSave.visibility = View.INVISIBLE
-           }
-        }
-        mViewModel.predictLive.observe(viewLifecycleOwner){
-            mBinding.signNameTxt.text = it.sign
-            mBinding.predictTxt.text = it.horoscope
-        }
-        mBinding.btnSave.setOnClickListener{
-            mViewModel.savePredict(mViewModel.predictLive.value?.copy() ?: return@setOnClickListener){
-                Toast.makeText(activity,R.string.success,Toast.LENGTH_SHORT).show()
+        mBinding.btnSave.setOnClickListener {
+            mViewModel.savePredict(mViewModel.predictLive.value?.copy()
+                ?: return@setOnClickListener) {
+                Toast.makeText(activity, R.string.success, Toast.LENGTH_SHORT).show()
             }
         }
-        mBinding.predictTxtBack.setOnClickListener{
+        observeViewModel()
+        mBinding.predictTxtBack.setOnClickListener {
             activity?.onBackPressed()
         }
     }
 
+    private fun observeViewModel() {
+        mViewModel.predictLive.observe(viewLifecycleOwner) {
+            mBinding.signNameTxt.text = it.sign
+            mBinding.predictTxt.text = it.horoscope
+        }
+    }
 
+    private fun parseParams() {
+        mViewModel.currentMode = arguments?.getString(FRAGMENT_MODE)
+            ?:throw RuntimeException("Unknown Mode")
+        when (mViewModel.currentMode) {
+            API_MODE -> {
+                mViewModel.currentSign = arguments?.getString(ZODIAC)
+                    ?: throw RuntimeException("Unknown sign")
+                launchApiMode()
+            }
+            ROOM_MODE -> {
+                mViewModel.currentPredict = (arguments?.getSerializable(MODEL) as ForecastModel?
+                    ?: throw RuntimeException("UnknownPredict"))
+                launchRoomMode()
+            }
+            else -> throw RuntimeException("Unknown Mode")
+        }
+    }
+
+    private fun launchApiMode() {
+        mBinding.predictTxt.setText(R.string.loading)
+        mViewModel.getPredict(mViewModel.currentSign!!)
+        mBinding.btnSave.visibility = View.VISIBLE
+    }
+
+    private fun launchRoomMode() {
+        mViewModel.predictLive.value = mViewModel.currentPredict
+        mBinding.btnSave.visibility = View.INVISIBLE
+    }
+
+    companion object {
+        private const val FRAGMENT_MODE = "fragment mode"
+        private const val API_MODE = "api mode"
+        private const val ROOM_MODE = "room mode"
+        private const val MODEL = "model"
+        private const val ZODIAC = "zodiac"
+        fun newBundleApi(sign: String): Bundle {
+            return Bundle().apply {
+                putString(FRAGMENT_MODE, API_MODE)
+                putString(ZODIAC, sign)
+            }
+        }
+
+        fun newBundleRoom(model: ForecastModel): Bundle {
+            return Bundle().apply {
+                putString(FRAGMENT_MODE, ROOM_MODE)
+                putSerializable(MODEL, model)
+            }
+        }
+    }
 }

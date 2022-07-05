@@ -6,8 +6,8 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.ListAdapter
 import droid.maxaria.maxander.domain.model.ForecastModel
-import droid.maxaria.maxander.simplehoroscope.PREDICT
 import droid.maxaria.maxander.simplehoroscope.databinding.PredictCardBinding
+import droid.maxaria.maxander.simplehoroscope.fragments.predictfragment.PredictFragment
 import javax.inject.Inject
 
 class MainListAdapter @Inject constructor(): ListAdapter<ForecastModel,MainListViewHolder>(MainListDiffCallback()) {
@@ -22,8 +22,7 @@ class MainListAdapter @Inject constructor(): ListAdapter<ForecastModel,MainListV
 
     override fun onBindViewHolder(holder: MainListViewHolder, position: Int) {
         holder.itemView.setOnClickListener{
-            val bundle = Bundle()
-            bundle.putSerializable(PREDICT,getItem(position))
+            val bundle = PredictFragment.newBundleRoom(getItem(position))
             onSignItemClickListener?.invoke(bundle)
         }
         holder.apply {

@@ -1,6 +1,5 @@
 package droid.maxaria.maxander.simplehoroscope.fragments.mainfragment
 
-import android.content.Context
 import android.os.Bundle
 import android.util.Log
 import androidx.fragment.app.Fragment
@@ -10,6 +9,7 @@ import android.view.ViewGroup
 import androidx.navigation.fragment.findNavController
 import droid.maxaria.maxander.simplehoroscope.*
 import droid.maxaria.maxander.simplehoroscope.databinding.FragmentMainBinding
+import droid.maxaria.maxander.simplehoroscope.fragments.predictfragment.PredictFragment
 
 class MainFragment : Fragment(), View.OnClickListener {
 
@@ -53,64 +53,25 @@ class MainFragment : Fragment(), View.OnClickListener {
         }
     }
 
-    override fun onClick(p0: View?) {
+    override fun onClick(view: View?) {
         Log.d("TAG", "2click")
-        val bundle = Bundle()
-        val editor = activity!!.getSharedPreferences("Sign",
-            Context.MODE_PRIVATE)!!.edit()
-        when (p0) {
-            mBinding.aquariusImg -> {
-                bundle.putString(ZODIAC, AQUARIUS_ID)
-                editor.putString(ZODIAC, AQUARIUS_ID)
-            }
-            mBinding.ariesImg -> {
-                bundle.putString(ZODIAC, ARIES_ID)
-                editor.putString(ZODIAC, ARIES_ID)
-            }
-            mBinding.cancerImg -> {
-                bundle.putString(ZODIAC, CANCER_ID)
-                editor.putString(ZODIAC, CANCER_ID)
-            }
-            mBinding.leoImg -> {
-                bundle.putString(ZODIAC, LEO_ID)
-                editor.putString(ZODIAC, LEO_ID)
-            }
-            mBinding.capricornusImg -> {
-                bundle.putString(ZODIAC, CAPRICORNUS_ID)
-                editor.putString(ZODIAC, CAPRICORNUS_ID)
-            }
-            mBinding.geminiImg -> {
-                bundle.putString(ZODIAC, GEMINI_ID)
-                editor.putString(ZODIAC, GEMINI_ID)
-            }
-            mBinding.libraImg -> {
-                bundle.putString(ZODIAC, LIBRA_ID)
-                editor.putString(ZODIAC, LIBRA_ID)
-            }
-            mBinding.piscesImg -> {
-                bundle.putString(ZODIAC, PISCES_ID)
-                editor.putString(ZODIAC, PISCES_ID)
-            }
-            mBinding.sagittariusImg -> {
-                bundle.putString(ZODIAC, SAGITTARIUS_ID)
-                editor.putString(ZODIAC, SAGITTARIUS_ID)
-            }
-            mBinding.scorpioImg -> {
-                bundle.putString(ZODIAC, SCORPIO_ID)
-                editor.putString(ZODIAC, SCORPIO_ID)
-            }
-            mBinding.taurusImg -> {
-                bundle.putString(ZODIAC, TAURUS_ID)
-                editor.putString(ZODIAC, TAURUS_ID)
-            }
-            mBinding.virgioImg -> {
-                bundle.putString(ZODIAC, VIRGO_ID)
-                editor.putString(ZODIAC, VIRGO_ID)
-            }
-            else -> bundle.putString(ZODIAC, ERROR_String)
+        val fragment = when (view) {
+            mBinding.aquariusImg -> PredictFragment.newBundleApi(AQUARIUS_ID)
+            mBinding.ariesImg -> PredictFragment.newBundleApi(ARIES_ID)
+            mBinding.cancerImg -> PredictFragment.newBundleApi(AQUARIUS_ID)
+            mBinding.leoImg -> PredictFragment.newBundleApi(LEO_ID)
+            mBinding.capricornusImg -> PredictFragment.newBundleApi(CAPRICORNUS_ID)
+            mBinding.geminiImg -> PredictFragment.newBundleApi(GEMINI_ID)
+            mBinding.libraImg -> PredictFragment.newBundleApi(LIBRA_ID)
+            mBinding.piscesImg -> PredictFragment.newBundleApi(PISCES_ID)
+            mBinding.sagittariusImg -> PredictFragment.newBundleApi(SAGITTARIUS_ID)
+            mBinding.scorpioImg -> PredictFragment.newBundleApi(SCORPIO_ID)
+            mBinding.taurusImg -> PredictFragment.newBundleApi(TAURUS_ID)
+            mBinding.virgioImg -> PredictFragment.newBundleApi(VIRGIO_ID)
+            else -> null
         }
-        editor.commit()
-        findNavController().navigate(R.id.action_mainFragment_to_predictFragment,bundle)
+        if (fragment != null)
+        findNavController().navigate(R.id.action_mainFragment_to_predictFragment,fragment)
     }
 }
 
