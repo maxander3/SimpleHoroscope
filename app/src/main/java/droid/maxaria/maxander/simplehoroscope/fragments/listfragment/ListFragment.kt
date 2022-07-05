@@ -33,8 +33,18 @@ class ListFragment : Fragment() {
         savedInstanceState: Bundle?,
     ): View {
         _binding=FragmentListBinding.inflate(inflater,container,false)
-        init()
+
         return mBinding.root
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        init()
+        super.onViewCreated(view, savedInstanceState)
+    }
+
+    override fun onDetach() {
+        _binding = null
+        super.onDetach()
     }
     private fun init(){
         adapter.onSignItemClickListener = {

@@ -23,6 +23,19 @@ class MainFragment : Fragment(), View.OnClickListener {
         savedInstanceState: Bundle?,
     ): View? {
         _binding = FragmentMainBinding.inflate(layoutInflater, container, false)
+        return mBinding.root
+    }
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        initClick()
+        super.onViewCreated(view, savedInstanceState)
+    }
+
+    //______________________________________________________________________________________________
+    override fun onDetach() {
+        _binding = null
+        super.onDetach()
+    }
+    private fun initClick(){
         mBinding.aquariusImg.setOnClickListener(this)
         mBinding.ariesImg.setOnClickListener(this)
         mBinding.cancerImg.setOnClickListener(this)
@@ -38,13 +51,6 @@ class MainFragment : Fragment(), View.OnClickListener {
         mBinding.mainToSavedBtn.setOnClickListener{
             findNavController().navigate(R.id.action_mainFragment_to_listFragment)
         }
-        return mBinding.root
-    }
-
-    //______________________________________________________________________________________________
-    override fun onDetach() {
-        _binding = null
-        super.onDetach()
     }
 
     override fun onClick(p0: View?) {

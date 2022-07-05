@@ -29,14 +29,17 @@ class PredictFragment : Fragment() {
         savedInstanceState: Bundle?,
     ): View {
         _binding = FragmentPredictBinding.inflate(layoutInflater,container,false)
-        init()
         return mBinding.root
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        init()
     }
 
 
     override fun onDestroyView() {
         _binding = null
-        mViewModel.predictLive.removeObservers(viewLifecycleOwner)
         super.onDestroyView()
     }
 
