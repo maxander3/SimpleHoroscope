@@ -28,7 +28,8 @@ class ListFragment : Fragment() {
     private lateinit var recyclerView: RecyclerView
 
     override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
+        inflater: LayoutInflater,
+        container: ViewGroup?,
         savedInstanceState: Bundle?,
     ): View {
         _binding=FragmentListBinding.inflate(inflater,container,false)
@@ -43,7 +44,8 @@ class ListFragment : Fragment() {
         recyclerView.adapter = adapter
         mViewModel.data.observe(viewLifecycleOwner){
             if (it.isNotEmpty()) {
-                adapter.submitList(it)            }
+                adapter.submitList(it)
+            }
         }
         recyclerSwipe()
     }

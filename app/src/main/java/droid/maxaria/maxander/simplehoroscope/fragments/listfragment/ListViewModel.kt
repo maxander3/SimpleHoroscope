@@ -1,6 +1,7 @@
 package droid.maxaria.maxander.simplehoroscope.fragments.listfragment
 
 import android.util.Log
+import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.asLiveData
@@ -19,7 +20,7 @@ import javax.inject.Inject
 
 @HiltViewModel
 class ListViewModel @Inject constructor(val getSavedPredictsCase: GetSavedPredictsUseCase,val deletePredictUseCase: DeletePredictUseCase): ViewModel() {
-    var data = getSavedPredictsCase.getSavedPredicts()
+    var data:LiveData<List<ForecastModel>> = getSavedPredictsCase.getSavedPredicts()
     @OptIn(DelicateCoroutinesApi::class)
     fun deletePredict(data: ForecastModel){
         GlobalScope.launch(Dispatchers.IO) {
