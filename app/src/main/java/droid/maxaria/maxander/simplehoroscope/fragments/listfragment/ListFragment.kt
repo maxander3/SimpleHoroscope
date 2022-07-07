@@ -1,5 +1,6 @@
 package droid.maxaria.maxander.simplehoroscope.fragments.listfragment
 
+import android.content.res.Configuration
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -13,6 +14,7 @@ import dagger.hilt.android.AndroidEntryPoint
 import droid.maxaria.maxander.simplehoroscope.R
 import droid.maxaria.maxander.simplehoroscope.databinding.FragmentListBinding
 import droid.maxaria.maxander.simplehoroscope.fragments.listfragment.recycle.MainListAdapter
+import droid.maxaria.maxander.simplehoroscope.fragments.predictfragment.PredictFragment
 import javax.inject.Inject
 
 @AndroidEntryPoint
@@ -23,6 +25,7 @@ class ListFragment : Fragment() {
     private var _binding:FragmentListBinding? = null
     private val mBinding:FragmentListBinding
         get() = _binding!!
+    var landscapeMode = false
     @Inject
     lateinit var adapter: MainListAdapter
     private lateinit var recyclerView: RecyclerView
@@ -46,9 +49,17 @@ class ListFragment : Fragment() {
         _binding = null
         super.onDetach()
     }
+    private fun checkScreenMode():Boolean{
+        return when (resources.configuration.orientation){
+            Configuration.ORIENTATION_PORTRAIT-> false
+            Configuration.ORIENTATION_LANDSCAPE-> true
+            else->throw RuntimeException("Unknown screen mode")
+        }
+    }
     private fun init(){
+        landscapeMode = checkScreenMode()
         adapter.onSignItemClickListener = {
-            findNavController().navigate(R.id.action_listFragment_to_predictFragment,it)
+            launchFragment(it)
         }
         recyclerView = mBinding.list
         recyclerView.adapter = adapter
@@ -80,6 +91,21 @@ class ListFragment : Fragment() {
 
         })
         itemTouchHelper.attachToRecyclerView(recyclerView)
+    }
+    private fun launchFragment(bundle:Bundle){
+        if (landscapeMode) {
+            val fragment= PredictFragment().apply {
+                arguments = bundle
+            }
+
+            requireActivity().supportFragmentManager.beginTransaction()
+                .replace(R.id.fragment_container2,fragment)
+                .addToBackStack(null)
+                .commit()
+        } else {
+            findNavController().navigate(R.id.action_listFragment_to_predictFragment,
+                bundle)
+        }
     }
 
 

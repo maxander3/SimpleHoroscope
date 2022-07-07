@@ -68,7 +68,7 @@ class PredictFragment : Fragment() {
 
     private fun parseParams() {
         mViewModel.currentMode = arguments?.getString(FRAGMENT_MODE)
-            ?:throw RuntimeException("Unknown Mode")
+            ?: throw RuntimeException("Unknown Mode")
         when (mViewModel.currentMode) {
             API_MODE -> {
                 mViewModel.currentSign = arguments?.getString(ZODIAC)

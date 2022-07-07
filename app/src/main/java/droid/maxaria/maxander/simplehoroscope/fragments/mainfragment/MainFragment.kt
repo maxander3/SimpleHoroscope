@@ -1,7 +1,7 @@
 package droid.maxaria.maxander.simplehoroscope.fragments.mainfragment
 
+import android.content.res.Configuration
 import android.os.Bundle
-import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -16,18 +16,29 @@ class MainFragment : Fragment(), View.OnClickListener {
     private var _binding: FragmentMainBinding? = null
     val mBinding: FragmentMainBinding
         get() = _binding!!
+    var landscapeMode = false
 
     //______________________________________________________________________________________________
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?,
-    ): View? {
+    ): View {
         _binding = FragmentMainBinding.inflate(layoutInflater, container, false)
         return mBinding.root
     }
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        initClick()
         super.onViewCreated(view, savedInstanceState)
+        initClick()
+        landscapeMode = checkScreenMode()
+    }
+
+    private fun checkScreenMode(): Boolean {
+        return when (resources.configuration.orientation) {
+            Configuration.ORIENTATION_PORTRAIT -> false
+            Configuration.ORIENTATION_LANDSCAPE -> true
+            else -> throw RuntimeException("Unknown screen mode")
+        }
     }
 
     //______________________________________________________________________________________________
@@ -35,7 +46,8 @@ class MainFragment : Fragment(), View.OnClickListener {
         _binding = null
         super.onDetach()
     }
-    private fun initClick(){
+
+    private fun initClick() {
         mBinding.aquariusImg.setOnClickListener(this)
         mBinding.ariesImg.setOnClickListener(this)
         mBinding.cancerImg.setOnClickListener(this)
@@ -48,17 +60,17 @@ class MainFragment : Fragment(), View.OnClickListener {
         mBinding.scorpioImg.setOnClickListener(this)
         mBinding.taurusImg.setOnClickListener(this)
         mBinding.virgioImg.setOnClickListener(this)
-        mBinding.mainToSavedBtn.setOnClickListener{
+        mBinding.mainToSavedBtn.setOnClickListener {
             findNavController().navigate(R.id.action_mainFragment_to_listFragment)
         }
     }
 
     override fun onClick(view: View?) {
-        Log.d("TAG", "2click")
-        val fragment = when (view) {
+
+        val bundle = when (view) {
             mBinding.aquariusImg -> PredictFragment.newBundleApi(AQUARIUS_ID)
             mBinding.ariesImg -> PredictFragment.newBundleApi(ARIES_ID)
-            mBinding.cancerImg -> PredictFragment.newBundleApi(AQUARIUS_ID)
+            mBinding.cancerImg -> PredictFragment.newBundleApi(CANCER_ID)
             mBinding.leoImg -> PredictFragment.newBundleApi(LEO_ID)
             mBinding.capricornusImg -> PredictFragment.newBundleApi(CAPRICORNUS_ID)
             mBinding.geminiImg -> PredictFragment.newBundleApi(GEMINI_ID)
@@ -70,8 +82,25 @@ class MainFragment : Fragment(), View.OnClickListener {
             mBinding.virgioImg -> PredictFragment.newBundleApi(VIRGIO_ID)
             else -> null
         }
-        if (fragment != null)
-        findNavController().navigate(R.id.action_mainFragment_to_predictFragment,fragment)
+        launchFragment(bundle)
+    }
+
+    private fun launchFragment(bundle: Bundle?) {
+        if (bundle != null) {
+            if (landscapeMode) {
+                val fragment = PredictFragment().apply {
+                    arguments = bundle
+                }
+                activity?.supportFragmentManager?.popBackStack()
+                requireActivity().supportFragmentManager.beginTransaction()
+                    .replace(R.id.fragment_container2, fragment)
+                    .addToBackStack(null)
+                    .commit()
+            } else {
+                findNavController().navigate(R.id.action_mainFragment_to_predictFragment,
+                    bundle)
+            }
+        } else throw RuntimeException("Unknown button")
     }
 }
 

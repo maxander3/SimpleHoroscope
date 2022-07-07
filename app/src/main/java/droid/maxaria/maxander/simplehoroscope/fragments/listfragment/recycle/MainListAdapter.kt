@@ -10,20 +10,22 @@ import droid.maxaria.maxander.simplehoroscope.databinding.PredictCardBinding
 import droid.maxaria.maxander.simplehoroscope.fragments.predictfragment.PredictFragment
 import javax.inject.Inject
 
-class MainListAdapter @Inject constructor(): ListAdapter<ForecastModel,MainListViewHolder>(MainListDiffCallback()) {
+class MainListAdapter @Inject constructor() :
+    ListAdapter<ForecastModel, MainListViewHolder>(MainListDiffCallback()) {
 
-    var onSignItemClickListener:((bundle:Bundle)->Unit)? = null
+    var onSignItemClickListener: ((bundle: Bundle) -> Unit)? = null
 
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MainListViewHolder {
-        return MainListViewHolder(PredictCardBinding.inflate(LayoutInflater.from(parent.context),parent,false))
+        return MainListViewHolder(PredictCardBinding.inflate(LayoutInflater.from(parent.context),
+            parent,
+            false))
     }
 
 
     override fun onBindViewHolder(holder: MainListViewHolder, position: Int) {
-        holder.itemView.setOnClickListener{
-            val bundle = PredictFragment.newBundleRoom(getItem(position))
-            onSignItemClickListener?.invoke(bundle)
+        holder.itemView.setOnClickListener {
+            onSignItemClickListener?.invoke(PredictFragment.newBundleRoom(getItem(position)))
         }
         holder.apply {
             date.text = getItem(position).date

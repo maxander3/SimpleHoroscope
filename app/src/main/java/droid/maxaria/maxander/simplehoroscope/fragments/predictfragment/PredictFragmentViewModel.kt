@@ -16,26 +16,27 @@ import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
-class PredictFragmentViewModel @Inject constructor (
+class PredictFragmentViewModel @Inject constructor(
     private val getPredictUseCase: GetPredictUseCase,
-    private val savePredictUseCase: SavePredictUseCase)
-    : ViewModel() {
-    var currentMode:String? = null
-    var currentSign:String? = null
-    var currentPredict:ForecastModel? = null
+    private val savePredictUseCase: SavePredictUseCase,
+) : ViewModel() {
+    var currentMode: String? = null
+    var currentSign: String? = null
+    var currentPredict: ForecastModel? = null
     var predictLive = MutableLiveData<ForecastModel>()
 
 
     @OptIn(DelicateCoroutinesApi::class)
-    fun getPredict(sign:String){
+    fun getPredict(sign: String) {
         GlobalScope.launch(Dispatchers.IO) {
-            val result=getPredictUseCase.getPredict(sign)
+            val result = getPredictUseCase.getPredict(sign)
             predictLive.postValue(result.body())
-            Log.d("TAG",result.body().toString())
+            Log.d("TAG", result.body().toString())
         }
     }
+
     @OptIn(DelicateCoroutinesApi::class)
-    fun savePredict(predict:ForecastModel,success:()->Unit){
+    fun savePredict(predict: ForecastModel, success: () -> Unit) {
         GlobalScope.launch(Dispatchers.IO) {
             savePredictUseCase.savePredictUseCase(predict)
         }
