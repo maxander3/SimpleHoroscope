@@ -48,6 +48,7 @@ class MainFragment : Fragment(), View.OnClickListener {
     }
 
     private fun initClick() {
+        mBinding.root.setOnClickListener(this)
         mBinding.aquariusImg.setOnClickListener(this)
         mBinding.ariesImg.setOnClickListener(this)
         mBinding.cancerImg.setOnClickListener(this)
@@ -82,11 +83,11 @@ class MainFragment : Fragment(), View.OnClickListener {
             mBinding.virgioImg -> PredictFragment.newBundleApi(VIRGIO_ID)
             else -> null
         }
+        if (bundle != null)
         launchFragment(bundle)
     }
 
-    private fun launchFragment(bundle: Bundle?) {
-        if (bundle != null) {
+    private fun launchFragment(bundle: Bundle) {
             if (landscapeMode) {
                 val fragment = PredictFragment().apply {
                     arguments = bundle
@@ -100,7 +101,6 @@ class MainFragment : Fragment(), View.OnClickListener {
                 findNavController().navigate(R.id.action_mainFragment_to_predictFragment,
                     bundle)
             }
-        } else throw RuntimeException("Unknown button")
     }
 }
 

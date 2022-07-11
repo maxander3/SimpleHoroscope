@@ -7,4 +7,7 @@
     <string name="loading" tools:ignore="TypographyEllipsis">Planets loading...</string>
     <string name="saved_predicts">Saved Predicts</string>
     <string name="success">Success</string>
+    <string name="Unk_Error">Unknown Error</string>
+    <string name="Internet_Error">Please check your internet connection</string>
+    <string name="save_error">Save error</string>
 </resources>

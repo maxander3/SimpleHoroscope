@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import androidx.activity.viewModels
+import androidx.core.view.isNotEmpty
 import androidx.fragment.app.FragmentContainerView
 import androidx.navigation.NavController
 import androidx.navigation.NavHost
@@ -30,4 +31,11 @@ class MainActivity : AppCompatActivity() {
         super.onDestroy()
     }
     //______________________________________________________________________________________________
+    override fun onBackPressed() {
+        if (mBinding.fragmentContainer2?.isNotEmpty() == true){
+            mBinding.fragmentContainer2?.removeAllViews()
+        }else {
+            super.onBackPressed()
+        }
+    }
 }

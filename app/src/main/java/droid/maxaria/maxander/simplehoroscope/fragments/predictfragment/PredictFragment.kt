@@ -48,8 +48,7 @@ class PredictFragment : Fragment() {
         parseParams()
 
         mBinding.btnSave.setOnClickListener {
-            mViewModel.savePredict(mViewModel.predictLive.value?.copy()
-                ?: return@setOnClickListener) {
+            mViewModel.savePredict(mViewModel.predictLive.value?.copy()) {
                 Toast.makeText(activity, R.string.success, Toast.LENGTH_SHORT).show()
             }
         }
@@ -64,6 +63,20 @@ class PredictFragment : Fragment() {
             mBinding.signNameTxt.text = it.sign
             mBinding.predictTxt.text = it.horoscope
         }
+        mViewModel.error.observe(viewLifecycleOwner){
+            when (it){
+                PredictFragmentViewModel.INTERNET_ERROR->
+                    mBinding.predictTxt.setText(R.string.Internet_Error)
+                PredictFragmentViewModel.SAVE_Error->makeToast(getString(R.string.save_error))
+                PredictFragmentViewModel.ROOM_ERROR->
+                    makeToast(getString(R.string.Unk_Error))
+                else ->makeToast(getString(R.string.Unk_Error))
+            }
+
+        }
+    }
+    private fun makeToast(text:String){
+        Toast.makeText(context,text,Toast.LENGTH_SHORT).show()
     }
 
     private fun parseParams() {
