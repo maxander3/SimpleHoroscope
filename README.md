@@ -1,4 +1,29 @@
 # SimpleHoroscope
+Api пердоставил - https://ohmanda.com/api/horoscope/
+Архитектура
+=====================
+App модуль
+* app
+  * App
+  * Constants
+* di
+  * DataModule
+* presentation
+  * single activity
+  * fragments
+  * viewModels
+  * MainListAdapter
+  * MainListDiffCallBack
+Domain модуль
+* domain
+  * Usecases
+  * HoroscopeRepository
+Data модуль
+* data
+  * HoroscopeRepository - реализация
+  * ApiProvider
+  * База данных и обьект DAO
+  
 MainFragment
 =====================
 
@@ -42,26 +67,4 @@ ________________________________________________________________________________
 5. Android Navigation
 6. Gson
 
-Архитектура
-=====================
-App модуль
-* app
-  * App
-  * Constants
-* di
-  * DataModule
-* presentation
-  * single activity
-  * fragments
-  * viewModels
-  * MainListAdapter
-  * MainListDiffCallBack
-Domain модуль
-* domain
-  * Usecases
-  * HoroscopeRepository
-Data модуль
-* data
-  * HoroscopeRepository - реализация
-  * ApiProvider
-  * База данных и обьект DAO
+
