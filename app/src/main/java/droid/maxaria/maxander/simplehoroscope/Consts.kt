@@ -1,7 +1,7 @@
 package droid.maxaria.maxander.simplehoroscope
 
 
-const val ERROR_String = "Error"
+
 const val ARIES_ID = "aries"
 const val TAURUS_ID = "taurus"
 const val GEMINI_ID = "gemini"

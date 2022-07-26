@@ -1,15 +1,14 @@
 package droid.maxaria.maxander.simplehoroscope.fragments.predictfragment
 
 import android.util.Log
+import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
-import droid.maxaria.maxander.data.RepositoryImpl
-import droid.maxaria.maxander.data.api.ApiProvider
 import droid.maxaria.maxander.domain.model.ForecastModel
 import droid.maxaria.maxander.domain.usecases.GetPredictUseCase
 import droid.maxaria.maxander.domain.usecases.SavePredictUseCase
-import droid.maxaria.maxander.simplehoroscope.R
 import kotlinx.coroutines.DelicateCoroutinesApi
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
@@ -27,38 +26,37 @@ class PredictFragmentViewModel @Inject constructor(
     private var _predictLive = MutableLiveData<ForecastModel>()
     val predictLive
         get() = _predictLive
-    private var _Error = MutableLiveData<String>()
+    private var _error = MutableLiveData<String>()
     val error
-        get() = _Error
+        get() = _error
+    private val _successSave = MutableLiveData<Unit>()
+    val successSave:LiveData<Unit>
+        get() = _successSave
 
 
-    @OptIn(DelicateCoroutinesApi::class)
     fun getPredict(sign: String) {
-        GlobalScope.launch(Dispatchers.IO) {
+        viewModelScope.launch(Dispatchers.IO) {
             try {
                 val result = getPredictUseCase.getPredict(sign)
                 predictLive.postValue(result.body())
             } catch (exception: Exception) {
-                _Error.postValue(INTERNET_ERROR)
+                _error.postValue(INTERNET_ERROR)
             }
         }
     }
 
-    @OptIn(DelicateCoroutinesApi::class)
-    fun savePredict(predict: ForecastModel?, success: () -> Unit) {
-        GlobalScope.launch(Dispatchers.IO) {
-            try {
-                if (predict != null) {
-                    savePredictUseCase.savePredictUseCase(predict)
-                    success()
-                } else {
-                    _Error.postValue(SAVE_Error)
+    fun savePredict(predict: ForecastModel?) {
+        viewModelScope.launch(Dispatchers.IO) {
+                try {
+                    if (predict != null) {
+                        savePredictUseCase.savePredictUseCase(predict)
+                        _successSave.postValue(Unit)
+                    } else {
+                        _error.postValue(SAVE_Error)
+                    }
+                }catch (e:Exception) {
+                    _error.postValue(ROOM_ERROR)
                 }
-                Log.d("Tag", "succes")
-            } catch (exception: Exception) {
-                _Error.postValue(ROOM_ERROR)
-                Log.d("Tag", "Error")
-            }
         }
 
     }

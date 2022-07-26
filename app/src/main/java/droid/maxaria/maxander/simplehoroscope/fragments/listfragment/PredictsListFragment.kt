@@ -18,7 +18,7 @@ import droid.maxaria.maxander.simplehoroscope.fragments.predictfragment.PredictF
 import javax.inject.Inject
 
 @AndroidEntryPoint
-class ListFragment : Fragment() {
+class PredictsListFragment : Fragment() {
 
 
     private val mViewModel: ListViewModel by viewModels()

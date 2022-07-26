@@ -31,7 +31,7 @@
     </fragment>
     <fragment
         android:id="@+id/listFragment"
-        android:name="droid.maxaria.maxander.simplehoroscope.fragments.listfragment.ListFragment"
+        android:name="droid.maxaria.maxander.simplehoroscope.fragments.listfragment.PredictsListFragment"
         android:label="fragment_list"
         tools:layout="@layout/fragment_list" >
         <action

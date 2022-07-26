@@ -1,10 +1,7 @@
 package droid.maxaria.maxander.simplehoroscope.fragments.listfragment
 
 import android.util.Log
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
-import androidx.lifecycle.asLiveData
+import androidx.lifecycle.*
 import dagger.hilt.android.lifecycle.HiltViewModel
 import droid.maxaria.maxander.domain.model.ForecastModel
 import droid.maxaria.maxander.domain.usecases.DeletePredictUseCase
@@ -21,9 +18,9 @@ import javax.inject.Inject
 @HiltViewModel
 class ListViewModel @Inject constructor(val getSavedPredictsCase: GetSavedPredictsUseCase,val deletePredictUseCase: DeletePredictUseCase): ViewModel() {
     var data:LiveData<List<ForecastModel>> = getSavedPredictsCase.getSavedPredicts()
-    @OptIn(DelicateCoroutinesApi::class)
+
     fun deletePredict(data: ForecastModel){
-        GlobalScope.launch(Dispatchers.IO) {
+        viewModelScope.launch(Dispatchers.IO) {
             deletePredictUseCase.deletePredictUseCase(data)
         }
     }

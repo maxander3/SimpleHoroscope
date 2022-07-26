@@ -3,11 +3,11 @@ package droid.maxaria.maxander.data
 import androidx.lifecycle.LiveData
 import droid.maxaria.maxander.data.api.ApiProvider
 import droid.maxaria.maxander.data.database.PredictDao
-import droid.maxaria.maxander.domain.Repository
+import droid.maxaria.maxander.domain.HoroscopeRepository
 import droid.maxaria.maxander.domain.model.ForecastModel
 import retrofit2.Response
 
-class RepositoryImpl (private val apiProvider: ApiProvider, private val predictDao: PredictDao):Repository {
+class HoroscopeRepositoryImpl (private val apiProvider: ApiProvider, private val predictDao: PredictDao):HoroscopeRepository {
     override suspend fun getPredict(sign: String): Response<ForecastModel> {
         return apiProvider.getForecast().getForecast(sign)
     }

@@ -3,6 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:gravity="center"
     android:orientation="vertical"
     tools:context=".fragments.mainfragment.MainFragment">
@@ -15,6 +16,7 @@
         android:gravity="center"
         android:text="@string/main_fragment_text"
         android:textColor="@color/gold"
+        android:textStyle=""
         android:textSize="24sp" />
 
     <LinearLayout
