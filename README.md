@@ -1,5 +1,6 @@
 # SimpleHoroscope
 Api пердоставил - https://ohmanda.com/api/horoscope/
+
 Архитектура
 =====================
 App модуль
